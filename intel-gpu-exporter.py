@@ -90,7 +90,7 @@ def update(data):
     gpu_power_package.set(data.get("power", {}).get("Package", 0))
 
 if __name__ == "__main__":
-    logging.basicConfig(format="%(asctime)s - %(message)s", level=debug)
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s") 
 
     start_http_server(8080)
 
@@ -103,7 +103,10 @@ if __name__ == "__main__":
         cmd = "intel_gpu_top -J -s {}".format(int(period))
 
     process = subprocess.Popen(
-        cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        cmd.split(), 
+        stdout=subprocess.PIPE, 
+        stderr=subprocess.PIPE, 
+        text=True
     )
 
     logging.info("Started " + cmd)
