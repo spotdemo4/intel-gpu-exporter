@@ -39,6 +39,8 @@ gpu_engines_compute_wait = Gauge("gpu_engines_compute_wait", "Compute wait utili
 gpu_power_gpu = Gauge("gpu_power_gpu", "GPU power W")
 gpu_power_package = Gauge("gpu_power_package", "Package power W")
 
+gpu_vram = Gauge("gpu_vram", "GPU VRAM B")
+
 def update(data):
     def get_engine(name):
         engines = data.get("engines", {})
@@ -88,6 +90,15 @@ def update(data):
 
     gpu_power_gpu.set(data.get("power", {}).get("GPU", 0))
     gpu_power_package.set(data.get("power", {}).get("Package", 0))
+
+    vram = 0
+    clients = data.get("clients", {})
+    for client in clients.values():
+        try:
+            vram += client["memory"]["local"]["total"]
+        except KeyError:
+            continue
+    gpu_vram.set(vram)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s") 
