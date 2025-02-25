@@ -95,7 +95,7 @@ def update(data):
     clients = data.get("clients", {})
     for client in clients.values():
         try:
-            vram += client["memory"]["local"]["total"]
+            vram += int(client["memory"]["local"]["total"])
         except KeyError:
             continue
     gpu_vram.set(vram)
