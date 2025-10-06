@@ -19,7 +19,7 @@ jobs:
           mkdir binaries
 
           nix bundle .# -o intel-gpu-exporter
-          tar czf ${{ github.event.repository.name }}-linux-amd64.tar.gz intel-gpu-exporter
+          tar czfh ${{ github.event.repository.name }}-linux-amd64.tar.gz intel-gpu-exporter
           mv ${{ github.event.repository.name }}-linux-amd64.tar.gz binaries
 
       - uses: softprops/action-gh-release@62c96d0c4e8a889135c1f3a25910db8dbe0e85f7 # v2.3.4
