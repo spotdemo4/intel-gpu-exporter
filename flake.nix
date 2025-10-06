@@ -119,7 +119,7 @@
         default = with pkgs;
           python3Packages.buildPythonApplication rec {
             pname = "intel-gpu-exporter";
-            version = "0.1.0";
+            version = "0.1.1";
             pyproject = true;
 
             src = ./.;
