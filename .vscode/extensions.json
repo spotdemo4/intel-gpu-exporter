@@ -1,3 +1,7 @@
 {
-  "recommendations": ["jnoortheen.nix-ide", "esbenp.prettier-vscode"]
+  "recommendations": [
+    "charliermarsh.ruff",
+    "jnoortheen.nix-ide",
+    "esbenp.prettier-vscode"
+  ]
 }

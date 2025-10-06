@@ -51,6 +51,7 @@
             intel-gpu-tools
 
             # lint
+            ruff
             alejandra
             prettier
 
@@ -74,6 +75,7 @@
 
         vulnerable = pkgs.mkShell {
           packages = with pkgs; [
+            pip-audit
             flake-checker
           ];
         };
@@ -83,9 +85,12 @@
         python = {
           src = ./.;
           deps = with pkgs; [
+            ruff
             trev.opengrep
           ];
           script = ''
+            ruff check .
+            ruff format --check .
             opengrep scan --quiet --error --config="${semgrep-rules}/python"
           '';
         };

@@ -17,30 +17,55 @@ gpu_rc6 = Gauge("gpu_rc6", "RC6 %")
 gpu_imc_bandwidth_reads = Gauge("gpu_imc_bandwidth_reads", "IMC reads MiB/s")
 gpu_imc_bandwidth_writes = Gauge("gpu_imc_bandwidth_writes", "IMC writes MiB/s")
 
-gpu_engines_render_3d_busy = Gauge("gpu_engines_render_3d_busy", "Render 3D 0 busy utilisation %")
-gpu_engines_render_3d_sema = Gauge("gpu_engines_render_3d_sema", "Render 3D 0 sema utilisation %")
-gpu_engines_render_3d_wait = Gauge("gpu_engines_render_3d_wait", "Render 3D 0 wait utilisation %")
+gpu_engines_render_3d_busy = Gauge(
+    "gpu_engines_render_3d_busy", "Render 3D 0 busy utilisation %"
+)
+gpu_engines_render_3d_sema = Gauge(
+    "gpu_engines_render_3d_sema", "Render 3D 0 sema utilisation %"
+)
+gpu_engines_render_3d_wait = Gauge(
+    "gpu_engines_render_3d_wait", "Render 3D 0 wait utilisation %"
+)
 
-gpu_engines_blitter_busy = Gauge("gpu_engines_blitter_busy", "Blitter 0 busy utilisation %")
-gpu_engines_blitter_sema = Gauge("gpu_engines_blitter_sema", "Blitter 0 sema utilisation %")
-gpu_engines_blitter_wait = Gauge("gpu_engines_blitter_wait", "Blitter 0 wait utilisation %")
+gpu_engines_blitter_busy = Gauge(
+    "gpu_engines_blitter_busy", "Blitter 0 busy utilisation %"
+)
+gpu_engines_blitter_sema = Gauge(
+    "gpu_engines_blitter_sema", "Blitter 0 sema utilisation %"
+)
+gpu_engines_blitter_wait = Gauge(
+    "gpu_engines_blitter_wait", "Blitter 0 wait utilisation %"
+)
 
-gpu_engines_video_enhance_busy = Gauge("gpu_engines_video_enhance_busy", "Video Enhance 0 busy utilisation %")
-gpu_engines_video_enhance_sema = Gauge("gpu_engines_video_enhance_sema", "Video Enhance 0 sema utilisation %")
-gpu_engines_video_enhance_wait = Gauge("gpu_engines_video_enhance_wait", "Video Enhance 0 wait utilisation %")
+gpu_engines_video_enhance_busy = Gauge(
+    "gpu_engines_video_enhance_busy", "Video Enhance 0 busy utilisation %"
+)
+gpu_engines_video_enhance_sema = Gauge(
+    "gpu_engines_video_enhance_sema", "Video Enhance 0 sema utilisation %"
+)
+gpu_engines_video_enhance_wait = Gauge(
+    "gpu_engines_video_enhance_wait", "Video Enhance 0 wait utilisation %"
+)
 
 gpu_engines_video_busy = Gauge("gpu_engines_video_busy", "Video 0 busy utilisation %")
 gpu_engines_video_sema = Gauge("gpu_engines_video_sema", "Video 0 sema utilisation %")
 gpu_engines_video_wait = Gauge("gpu_engines_video_wait", "Video 0 wait utilisation %")
 
-gpu_engines_compute_busy = Gauge("gpu_engines_compute_busy", "Compute busy utilisation %")
-gpu_engines_compute_sema = Gauge("gpu_engines_compute_sema", "Compute sema utilisation %")
-gpu_engines_compute_wait = Gauge("gpu_engines_compute_wait", "Compute wait utilisation %")
+gpu_engines_compute_busy = Gauge(
+    "gpu_engines_compute_busy", "Compute busy utilisation %"
+)
+gpu_engines_compute_sema = Gauge(
+    "gpu_engines_compute_sema", "Compute sema utilisation %"
+)
+gpu_engines_compute_wait = Gauge(
+    "gpu_engines_compute_wait", "Compute wait utilisation %"
+)
 
 gpu_power_gpu = Gauge("gpu_power_gpu", "GPU power W")
 gpu_power_package = Gauge("gpu_power_package", "Package power W")
 
 gpu_vram = Gauge("gpu_vram", "GPU VRAM B")
+
 
 def update(data):
     def get_engine(name):
@@ -101,8 +126,9 @@ def update(data):
             continue
     gpu_vram.set(vram)
 
+
 def run_exporter():
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s") 
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
     start_http_server(8080)
 
@@ -116,10 +142,7 @@ def run_exporter():
 
     # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit
     process = subprocess.Popen(
-        split(cmd), 
-        stdout=subprocess.PIPE, 
-        stderr=subprocess.PIPE, 
-        text=True
+        split(cmd), stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
     )
 
     logging.info("Started " + cmd)
@@ -153,6 +176,7 @@ def run_exporter():
         logging.error(f"Error: {error}")
 
     logging.info("Finished")
+
 
 if __name__ == "__main__":
     run_exporter()
