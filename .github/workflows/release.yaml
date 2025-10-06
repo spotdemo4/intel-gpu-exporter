@@ -1,0 +1,48 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: spotdemo4/intel-gpu-exporter/.github/actions/init@main
+
+      - run: |
+          mkdir binaries
+
+          nix build .#
+          tar czf ${{ github.event.repository.name }}-linux-amd64.tar.gz -C result/bin ${{ github.event.repository.name }}
+          mv ${{ github.event.repository.name }}-linux-amd64.tar.gz binaries
+
+      - uses: softprops/action-gh-release@62c96d0c4e8a889135c1f3a25910db8dbe0e85f7 # v2.3.4
+        with:
+          files: |-
+            binaries/*
+
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: spotdemo4/intel-gpu-exporter/.github/actions/init@main
+
+      - uses: nicknovitski/nix-develop@9be7cfb4b10451d3390a75dc18ad0465bed4932a # v1.2.1
+        with:
+          arguments: ".#release"
+
+      - name: Build & push images
+        run: |
+          nix build .#image
+
+          ./result | gzip --fast | skopeo copy \
+            --dest-creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} \
+            docker-archive:/dev/stdin \
+            docker://ghcr.io/${{ github.repository }}:${GITHUB_REF_NAME#v}

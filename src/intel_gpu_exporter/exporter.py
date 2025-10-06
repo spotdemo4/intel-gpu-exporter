@@ -1,4 +1,5 @@
 from prometheus_client import start_http_server, Gauge
+from shlex import quote, split
 import os
 import subprocess
 import json
@@ -100,21 +101,22 @@ def update(data):
             continue
     gpu_vram.set(vram)
 
-if __name__ == "__main__":
+def run_exporter():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s") 
 
     start_http_server(8080)
 
-    period = os.getenv("REFRESH_PERIOD_MS", 10000)
+    period = os.getenv("REFRESH_PERIOD_MS", "10000")
     device = os.getenv("DEVICE")
 
     if device is not None:
-        cmd = "intel_gpu_top -J -s {} -d {}".format(int(period), device)
+        cmd = "intel_gpu_top -J -s {} -d {}".format(quote(period), quote(device))
     else:
-        cmd = "intel_gpu_top -J -s {}".format(int(period))
+        cmd = "intel_gpu_top -J -s {}".format(quote(period))
 
+    # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit
     process = subprocess.Popen(
-        cmd.split(), 
+        split(cmd), 
         stdout=subprocess.PIPE, 
         stderr=subprocess.PIPE, 
         text=True
@@ -151,3 +153,6 @@ if __name__ == "__main__":
         logging.error(f"Error: {error}")
 
     logging.info("Finished")
+
+if __name__ == "__main__":
+    run_exporter()

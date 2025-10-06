@@ -25,9 +25,7 @@
       "icon": "external link",
       "includeVars": false,
       "keepTime": false,
-      "tags": [
-        "transcoding_user"
-      ],
+      "tags": ["transcoding_user"],
       "targetBlank": false,
       "title": "Services",
       "tooltip": "",
@@ -223,9 +221,7 @@
               "id": "byNames",
               "options": {
                 "mode": "exclude",
-                "names": [
-                  "igpu_engines_blitter_0_busy"
-                ],
+                "names": ["igpu_engines_blitter_0_busy"],
                 "prefix": "All except:",
                 "readOnly": true
               }
@@ -1065,9 +1061,7 @@
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
+              "calcs": ["lastNotNull"],
               "fields": "",
               "values": false
             },
@@ -1100,11 +1094,7 @@
   ],
   "refresh": "5s",
   "schemaVersion": 39,
-  "tags": [
-    "igpu",
-    "intel",
-    "transcoding"
-  ],
+  "tags": ["igpu", "intel", "transcoding"],
   "templating": {
     "list": [
       {

@@ -1,0 +1,19 @@
+[project]
+name = "intel-gpu-exporter"
+version = "0.1.0"
+description = "Add your description here"
+readme = ".github/README.md"
+authors = [
+    { name = "trev", email = "me@trev.xyz" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "prometheus-client>=0.22.1",
+]
+
+[project.scripts]
+intel-gpu-exporter = "intel_gpu_exporter.exporter:run_exporter"
+
+[build-system]
+requires = ["uv_build>=0.8.14,<0.9.0"]
+build-backend = "uv_build"
