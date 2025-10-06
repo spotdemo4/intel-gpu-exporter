@@ -6,6 +6,7 @@
 /.venv/
 
 # build
+/intel-gpu-exporter*
 /build/
 /tmp/
 

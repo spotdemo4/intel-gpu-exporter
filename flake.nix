@@ -39,7 +39,7 @@
         inherit system;
         overlays = [nur.overlays.default];
       };
-    in {
+    in rec {
       devShells = {
         default = pkgs.mkShell {
           packages = with pkgs; [
