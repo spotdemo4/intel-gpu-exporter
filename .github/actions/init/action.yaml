@@ -15,4 +15,4 @@ runs:
           extra-substituters = https://cache.trev.zip/nur
           extra-trusted-public-keys = nur:DoXGy0SJ+5udhvZgtzwEXhQMuOCFN7FSXRmtiZhF1Vw=
 
-    - uses: spotdemo4/nix-simple-cache-action@678b319b2d13680785ab65a0f5618a2e662ac04d # v1.4.8
+    - uses: spotdemo4/nix-simple-cache-action@b559f8e40714a57f02221dfe464f780a09df9e0e # v1.5.3
