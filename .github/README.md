@@ -3,9 +3,6 @@
 > [!IMPORTANT]
 > I am now using [spotdemo4/nvtop-exporter](https://github.com/spotdemo4/nvtop-exporter) instead of this
 
-![check](https://gitea.com/spotdemo4/intel-gpu-exporter/actions/workflows/check.yaml/badge.svg)
-![vulnerable](https://gitea.com/spotdemo4/intel-gpu-exporter/actions/workflows/vulnerable.yaml/badge.svg)
-
 Get metrics from Intel GPUs
 
 ## Deployment
